@@ -9,7 +9,9 @@ package di
 import (
 	"github.com/chocogem/bigquery-golang/pkg/api"
 	"github.com/chocogem/bigquery-golang/pkg/api/handler"
+	"github.com/chocogem/bigquery-golang/pkg/api/middleware"
 	"github.com/chocogem/bigquery-golang/pkg/config"
+	"github.com/chocogem/bigquery-golang/pkg/log"
 	"github.com/chocogem/bigquery-golang/pkg/repository/adapter"
 	adapter2 "github.com/chocogem/bigquery-golang/pkg/usecase/adapter"
 )
@@ -26,6 +28,14 @@ func InitializeAPI(cfg config.Config) (*api.ServerHTTP, error) {
 	handlers := &api.Handlers{
 		UserHandler: userHandler,
 	}
-	serverHTTP := api.NewServerHTTP(handlers)
+	authenticationHandler := middleware.NewAuthenticationHandler()
+	logger := log.NewLogrusLogger(cfg)
+	logrusImplement := log.NewImplementLogrusLogger(logger)
+	errorHandler := middleware.NewErrorHandler(logrusImplement)
+	middlewares := &api.Middlewares{
+		AuthenticationHandler: authenticationHandler,
+		ErrorHandler:          errorHandler,
+	}
+	serverHTTP := api.NewServerHTTP(handlers, middlewares)
 	return serverHTTP, nil
 }

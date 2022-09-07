@@ -6,19 +6,15 @@ import (
 )
 
 type Config struct {
-	DBHost         string `mapstructure:"DB_HOST" `
-	DBName         string `mapstructure:"DB_NAME" `
-	DBUser         string `mapstructure:"DB_USER" `
-	DBPort         string `mapstructure:"DB_PORT" `
-	DBPassword     string `mapstructure:"DB_PASSWORD" `
 	BQProjectId    string `mapstructure:"BQ_PROJECT_ID" `
 	BQDatasetName  string `mapstructure:"BQ_DATASET" `
 	LogrusLogLevel string `mapstructure:"LOGRUS_LOG_LEVEL" `
+
 }
 
 // List of environment variables to fetch for
 var envs = []string{
-	"BQ_PROJECT_ID","BQ_DATASET",
+	"BQ_PROJECT_ID","BQ_DATASET","LOGRUS_LOG_LEVEL",
 }
 
 func LoadConfig() (Config, error) {

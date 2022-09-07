@@ -4,7 +4,6 @@ go 1.17
 
 require (
 	cloud.google.com/go/bigquery v1.8.0
-	cloud.google.com/go/storage v1.14.0
 	github.com/Nerzal/gocloak/v8 v8.6.0
 	github.com/gin-gonic/gin v1.8.1
 	github.com/go-playground/validator/v10 v10.11.0
@@ -13,8 +12,6 @@ require (
 	github.com/sirupsen/logrus v1.9.0
 	github.com/spf13/viper v1.12.0
 	google.golang.org/api v0.81.0
-	gorm.io/driver/postgres v1.3.9
-	gorm.io/gorm v1.23.8
 )
 
 require (
@@ -32,16 +29,6 @@ require (
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/googleapis/gax-go/v2 v2.4.0 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
-	github.com/jackc/chunkreader/v2 v2.0.1 // indirect
-	github.com/jackc/pgconn v1.12.1 // indirect
-	github.com/jackc/pgio v1.0.0 // indirect
-	github.com/jackc/pgpassfile v1.0.0 // indirect
-	github.com/jackc/pgproto3/v2 v2.3.0 // indirect
-	github.com/jackc/pgservicefile v0.0.0-20200714003250-2b9c44734f2b // indirect
-	github.com/jackc/pgtype v1.11.0 // indirect
-	github.com/jackc/pgx/v4 v4.16.1 // indirect
-	github.com/jinzhu/inflection v1.0.0 // indirect
-	github.com/jinzhu/now v1.1.4 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/magiconair/properties v1.8.6 // indirect

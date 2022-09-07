@@ -8,8 +8,9 @@ import (
 	"github.com/chocogem/bigquery-golang/pkg/config"
 	"github.com/google/wire"
 )
+
 func InitializeAPI(cfg config.Config) (*api.ServerHTTP, error) {
-	wire.Build(FactPostCampaignSet, HTTPSet)
+	wire.Build(FactPostCampaignSet,HTTPSet,LogSet)
 
 	return &api.ServerHTTP{}, nil
 }
