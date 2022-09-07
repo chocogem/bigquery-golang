@@ -2,18 +2,19 @@ package handler
 
 import (
 	"net/http"
+
+	"github.com/chocogem/bigquery-golang/pkg/usecase"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/copier"
-	"github.com/chocogem/bigquery-golang/pkg/usecase"
 )
 
 type UserHandler struct {
-	userUseCase usecase.UserUseCase
+	userUseCase  usecase.UserUseCase
 }
 
-func NewUserHandler(usecase usecase.UserUseCase) *UserHandler {
+func NewUserHandler(uc usecase.UserUseCase) *UserHandler {
 	return &UserHandler{
-		userUseCase: usecase,
+		userUseCase:  uc,
 	}
 }
 
@@ -22,7 +23,7 @@ func NewUserHandler(usecase usecase.UserUseCase) *UserHandler {
 // @Summary      List all user
 // @Produce      json
 // @Success      200  {object}  UserResponse
-// @Router       /user 
+// @Router       /user
 func (cr *UserHandler) FindAll(c *gin.Context) {
 	users, err := cr.userUseCase.FindAll()
 	if err != nil {
