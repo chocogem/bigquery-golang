@@ -15,11 +15,11 @@ type userDatabase struct {
 }
 
 type user struct {
-	UserId        string `bigquery:"user_id"`
-	UserName      string `bigquery:"user_name"`
-	FirstName     string `bigquery:"first_name"`
-	LastName      string `bigquery:"last_name"`
-	ExpireDate    string `bigquery:"expire_date"`
+	UserId     string `bigquery:"user_id"`
+	UserName   string `bigquery:"user_name"`
+	FirstName  string `bigquery:"first_name"`
+	LastName   string `bigquery:"last_name"`
+	ExpireDate string `bigquery:"expire_date"`
 }
 
 func NewUserRepository(cfg config.Config) (repository.UserRepository, error) {
@@ -31,11 +31,11 @@ func NewUserRepository(cfg config.Config) (repository.UserRepository, error) {
 func (c *userDatabase) FindAll() ([]domain.User, error) {
 
 	sql := `SELECT user_id ,user_name ,first_name ,last_name , FORMAT_DATE("%y-%m-%d",expire_date) expire_date FROM ` +
-		"`" + c.bigQueryConfig.ProjectId + "." + c.bigQueryConfig.DatasetName + ".users` " 
-	//projectID := c.bigQueryConfig.ProjectId
+		"`" + c.bigQueryConfig.ProjectId + "." + c.bigQueryConfig.DatasetName + ".users` "
+
 	ctx := context.Background()
 
-	client, err := bigquery.NewClient(ctx, "")
+	client, err := bigquery.NewClient(ctx, c.bigQueryConfig.ProjectId)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ func (c *userDatabase) FindAll() ([]domain.User, error) {
 		if err != nil {
 			return nil, err
 		}
-		users[i] = domain.NewUser(row.UserId, row.UserName, row.FirstName, row.LastName,row.ExpireDate)
+		users[i] = domain.NewUser(row.UserId, row.UserName, row.FirstName, row.LastName, row.ExpireDate)
 		i++
 	}
 
